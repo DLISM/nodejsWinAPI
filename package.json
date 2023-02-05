@@ -1,0 +1,15 @@
+{
+  "name": "nodejswinapi",
+  "version": "1.0.0",
+  "description": "тестовая задача для получения пользователей windows",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Javohir Ismoilov",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2"
+  }
+}
