@@ -1,6 +1,7 @@
 const express = require("express");
 
 const app = express();
+const os = require('os');
 
 app.use(express.urlencoded({extended: false}))
 
@@ -18,5 +19,7 @@ app.post('/check-user', (req, res)=>{
 const PORT =3000
 
 app.listen(PORT, ()=>{
+
     console.log("Сервер зпаущен!")
+    console.log(os.userInfo().username)
 })
