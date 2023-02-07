@@ -1,7 +1,8 @@
 const express = require("express");
 
 const app = express();
-const os = require('os');
+
+const hello_world = require('bindings')('get_users')
 
 app.use(express.urlencoded({extended: false}))
 
@@ -20,6 +21,7 @@ const PORT =3000
 
 app.listen(PORT, ()=>{
 
-    console.log("Сервер зпаущен!")
-    console.log(os.userInfo().username)
+    console.log("Сервер зпаущен!");
+    console.log(hello_world.getUsers());
+
 })
