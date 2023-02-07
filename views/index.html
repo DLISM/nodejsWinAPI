@@ -19,7 +19,7 @@
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: { username: 'Fourth message (4)' }
+                body: JSON.stringify({ username: 'Admin' })
             }
         ).then(result => result.json().then(console.log))
         .catch(()=>{

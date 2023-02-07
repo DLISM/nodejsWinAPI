@@ -1,8 +1,10 @@
 const express = require("express");
 const userList = require('bindings')('get_users')
+const bodyParser = require('body-parser')
 
 const app = express();
 
+app.use(bodyParser.json())
 app.use(express.urlencoded({extended: false}))
 
 app.get('/', (req, res)=>{
@@ -10,14 +12,15 @@ app.get('/', (req, res)=>{
 })
 
 app.post('/check-user', (req, res)=>{
-        res.send({ message: "OK", user: findUser() , otvet: "dasdsa"});
+    let username = req.body.username
+    res.send({ message: "OK", user: findUser(username) , otvet: "dasdsa"});
 })
 
 
-function findUser(){
+function findUser(username){
     let usersList = userList.getUsers().split(" ");
 
-    if(usersList.find(el=>el==="admin"))
+    if(usersList.find(el=>el===username))
         return true;
     else
         return false;
