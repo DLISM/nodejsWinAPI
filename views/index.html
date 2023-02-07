@@ -7,9 +7,25 @@
 <body>
 <h1>Поиск пользователья в Windows</h1>
 
-<form action="/check-user" method="post">
-    <input type="text" name="username" placeholder="Имя пользователя">
+<form>
+    <input type="text" name="username" placeholder="Имя пользователя" required minlength="3">
     <input type="submit" value="Найти">
 </form>
+<script>
+    document.querySelector('form').addEventListener("submit",async (evt) => {
+        evt.preventDefault();
+        fetch(
+            '/check-user',
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: { username: 'Fourth message (4)' }
+            }
+        ).then(result => result.json().then(console.log))
+        .catch(()=>{
+            console.log("Пользователь не найден");
+        })
+    });
+</script>
 </body>
 </html>
