@@ -5,27 +5,46 @@
     <title>Node.js WinAPI project</title>
 </head>
 <body>
-<h1>Поиск пользователья в Windows</h1>
-
-<form>
+<nav><a href="/how-it-work">Как это работает</a><a href="/author">Автор</a></nav>
+<h3>Поиск пользователья в Windows</h3>
+<form id="form">
     <input type="text" name="username" placeholder="Имя пользователя" required minlength="3">
-    <input type="submit" value="Найти">
+    <input type="submit" value="Проверить">
 </form>
+<div id="message"></div>
 <script>
     document.querySelector('form').addEventListener("submit",async (evt) => {
         evt.preventDefault();
+        let form = document.querySelector('#form');
+        let data = new FormData(form);
         fetch(
             '/check-user',
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: 'Admin' })
+                body: JSON.stringify({ username: data.get("username") })
             }
-        ).then(result => result.json().then(console.log))
+        )
+        .then((response) => response.json())
+        .then((data) => {
+            document.querySelector("#message").textContent=data.message
+        })
         .catch(()=>{
-            console.log("Пользователь не найден");
+            document.querySelector("#message").textContent="Ошибка поиска!"
         })
     });
 </script>
+
+<style>
+    nav{
+        padding: 10px;
+        background: #e6e6e6;
+    }
+    a{
+        margin-right: 15px;
+        text-decoration: none;
+        color: #2f2f2f;
+    }
+</style>
 </body>
 </html>
